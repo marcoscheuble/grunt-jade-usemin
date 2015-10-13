@@ -371,7 +371,7 @@ exports.task = function (grunt) {
 
                     //add prefix to src
                     if (prefix) {
-                        src = path.join(prefix, src);
+                        src =  path.join(typeof prefix === 'function' ? prefix(src) : prefix, src);
                     }
 
                     //original path exists
