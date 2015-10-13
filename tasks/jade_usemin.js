@@ -39,12 +39,12 @@ module.exports = function (grunt) {
             options.targetPrefix += '/';
         }
 
-        if (options.prefix && !_.isString(options.prefix)) {
-            grunt.warn('Option prefix must be a string');
+        if (options.prefix && (!_.isString(options.prefix) || !_.isFunction(options.prefix))) {
+            grunt.warn('Option prefix must be a string or function');
             options.prefix = null;
         }
 
-        if (options.prefix && options.prefix.slice(-1) !== '/') {
+        if (options.prefix && _.isString(options.prefix) && options.prefix.slice(-1) !== '/') {
             options.prefix += '/';
         }
 
