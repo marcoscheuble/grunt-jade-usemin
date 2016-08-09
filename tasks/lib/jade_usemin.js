@@ -392,7 +392,7 @@ exports.task = function (grunt) {
                         return addSrcToTarget(tempExtraction, target, newSrcPath);
                     }
                     grunt.verbose.writelns('Src file ' + newSrcPath + " wasn't found relative to jade file as well.");
-                    grunt.log.warn("Found script src that doesn't exist: " + src);
+                    grunt.fail("Found script src that doesn't exist: " + src);
                 }
             }
         });
