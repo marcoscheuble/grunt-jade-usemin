@@ -292,6 +292,7 @@ exports.task = function (grunt) {
         var insideBuild = false;
         var tempExtraction = {};
         var lines = jadeContents.split('\n');
+        var exit = false;
 
         _.forEach(lines, function (line, lineIndex) {
             //if still scanning for build:<type>
@@ -392,11 +393,15 @@ exports.task = function (grunt) {
                         return addSrcToTarget(tempExtraction, target, newSrcPath);
                     }
                     grunt.verbose.writelns('Src file ' + newSrcPath + " wasn't found relative to jade file as well.");
-                    grunt.fail.fatal("Found script src that doesn't exist: " + src);
+                    grunt.log.warn("Found script src that doesn't exist: " + src);
                 }
             }
         });
-
+        
+        if(exit){
+            grunt.fail.fatal("Finished because of missing files.");
+        }
+        
         if (insideBuild) {
             grunt.fatal("Couldn't find '<!-- endbuild -->' in file: " + location + ', target: ' + target);
         }
